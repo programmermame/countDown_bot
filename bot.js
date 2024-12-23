@@ -1,6 +1,7 @@
 import TelegramBot from 'node-telegram-bot-api';
 import fetch from 'node-fetch';  // Use import instead of require
 import dotenv from 'dotenv';  // Use import for dotenv
+import http from 'http';  // Node.js HTTP module
 
 dotenv.config();  // Load environment variables
 
@@ -71,4 +72,13 @@ bot.onText(/\/remind/, (msg) => {
 // Handle errors
 bot.on('polling_error', (error) => {
     console.log(error);  // You can log the error to a file or monitoring system
+});
+
+// Create a basic HTTP server to ensure port binding for Render
+const port = process.env.PORT || 10000;
+http.createServer((req, res) => {
+    res.writeHead(200, { 'Content-Type': 'text/plain' });
+    res.end('Bot is running');
+}).listen(port, () => {
+    console.log(`Server is running on port ${port}`);
 });
