@@ -1,0 +1,12 @@
+# Ignore node_modules folder
+node_modules/
+
+# Ignore .env file (for sensitive information like API keys)
+.env
+
+# Ignore bot.js file (if you want to keep it private)
+bot.js
+
+# Optional: Ignore log files and other generated files
+*.log
+*.tmp
