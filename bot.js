@@ -12,7 +12,7 @@ const adminUserId = process.env.YOUR_USER_ID;  // Admin user ID from .env
 const bot = new TelegramBot(token, { polling: true });
 
 // Exit Exam Date
-const examDate = new Date("2025-02-03T00:00:00Z");
+const examDate = new Date("2025-02-03T08:30:00Z");
 
 // Function to calculate the remaining time
 function getRemainingTime() {
