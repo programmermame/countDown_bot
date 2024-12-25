@@ -22,7 +22,7 @@ const examDate = new Date("2025-02-03T08:30:00Z");
 
 // Function to calculate the remaining time
 function getRemainingTime() {
-    const now = new Date();
+    const now = new Date().toLocaleString();
     const timeDiff = examDate - now;
 
     const days = Math.floor(timeDiff / (1000 * 60 * 60 * 24));
