@@ -1,15 +1,21 @@
 import TelegramBot from 'node-telegram-bot-api';
-import fetch from 'node-fetch';  // Use import instead of require
+import fetch from 'node-fetch'; // Use import instead of require
 import dotenv from 'dotenv';  // Use import for dotenv
-import http from 'http';  // Node.js HTTP module
+import http from 'http'; // Node.js HTTP module
+import express from 'express'; // Express to handle HTTP requests
 
-dotenv.config();  // Load environment variables
+dotenv.config(); // Load environment variables
 
 // Load Telegram Bot token and user ID from environment variables
 const token = process.env.TELEGRAM_BOT_TOKEN;
 const adminUserId = process.env.YOUR_USER_ID;  // Admin user ID from .env
 
-const bot = new TelegramBot(token, { polling: true });
+// Set up the Express app
+const app = express();
+
+// Create a Telegram bot instance with webhook setup
+const bot = new TelegramBot(token);
+const port = process.env.PORT || 10000; // Ensure a port is set for Render
 
 // Exit Exam Date
 const examDate = new Date("2025-02-03T08:30:00Z");
@@ -44,12 +50,6 @@ function sendReminderMessage(chatId) {
     bot.sendMessage(chatId, message, { parse_mode: 'Markdown' });
 }
 
-// Periodically send countdown updates to the group (once a day)
-setInterval(() => {
-    const chatId = process.env.YOUR_USER_ID;  // Use the group chat ID from .env
-    sendReminderMessage(chatId);
-}, 1000 * 60 * 60 * 24);  // Send once a day
-
 // Respond to "/start" command
 bot.onText(/\/start/, (msg) => {
     const chatId = msg.chat.id;
@@ -58,7 +58,7 @@ bot.onText(/\/start/, (msg) => {
 
 // Respond to "/remind" command but restrict to admin user only
 bot.onText(/\/remind/, (msg) => {
-    const chatId = process.env.YOUR_USER_ID;
+    const chatId = msg.chat.id;
     const userId = msg.from.id;
 
     // Check if the user is the admin (you)
@@ -69,16 +69,36 @@ bot.onText(/\/remind/, (msg) => {
     }
 });
 
-// Handle errors
-bot.on('polling_error', (error) => {
-    console.log(error);  // You can log the error to a file or monitoring system
+// Set webhook URL for Telegram bot
+const webhookUrl = `${process.env.HOST_URL}/bot${token}`;
+bot.setWebHook(webhookUrl);
+
+// Create an HTTP server with Express to handle webhook requests
+app.use(express.json()); // Parse incoming JSON requests
+
+// Endpoint that Telegram will send POST requests to
+app.post(`/bot${token}`, (req, res) => {
+    const update = req.body;
+    if (update.message) {
+        const chatId = update.message.chat.id;
+
+        // Handle incoming message
+        if (update.message.text === '/start') {
+            bot.sendMessage(chatId, "Welcome to the Countdown Bot! I will remind you about the Exit Exam and give updates on the countdown.");
+        } else if (update.message.text === '/remind') {
+            const userId = update.message.from.id;
+            // Check if the user is the admin
+            if (userId === parseInt(adminUserId)) {
+                sendReminderMessage(chatId);
+            } else {
+                bot.sendMessage(chatId, "Sorry, you don't have permission to use this command.");
+            }
+        }
+    }
+    res.send('ok'); // Respond to Telegram that the request was successful
 });
 
 // Create a basic HTTP server to ensure port binding for Render
-const port = process.env.PORT || 10000;
-http.createServer((req, res) => {
-    res.writeHead(200, { 'Content-Type': 'text/plain' });
-    res.end('Bot is running');
-}).listen(port, () => {
+http.createServer(app).listen(port, () => {
     console.log(`Server is running on port ${port}`);
 });
