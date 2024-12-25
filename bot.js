@@ -89,7 +89,6 @@ app.post(`/bot${token}`, (req, res) => {
             const userId = update.message.from.id;
             // Check if the user is the admin
             if (userId === parseInt(adminUserId)) {
-                console.log("Chat ID for /remind command:", msg.chat.id);
                 sendReminderMessage(chatId);  // Send reminder to the group
             } else {
                 bot.sendMessage(chatId, "Sorry, you don't have permission to use this command.");
