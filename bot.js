@@ -38,9 +38,9 @@ function sendReminderMessage(chatId) {
     let message = `⏰ *Reminder!* 📝\n\n`;
 
     if (days > 0) {
-        message += `Your Exit Exam is in *${days} days*, *${hours} hours*, and *${minutes} minutes*! 📚📖`;
+        message += `Your Exit Exam is in *${days} days*, *${hours} hours*, and *${minutes} minutes*! 📚📖\n\n Time to study hard! 🔥📚`;
     } else if (days === 0 && hours > 0) {
-        message += `Your Exit Exam is today! Only *${hours} hours* and *${minutes} minutes* left! Time to study hard! 🔥📚`;
+        message += `Your Exit Exam is today! Only *${hours} hours* and *${minutes} minutes* left! `;
     } else if (days === 0 && hours === 0 && minutes > 0) {
         message += `Your Exit Exam is in *${minutes} minutes*! 💥 It's almost time, good luck! 🍀`;
     } else {
