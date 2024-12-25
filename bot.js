@@ -18,7 +18,7 @@ const bot = new TelegramBot(token);
 const port = process.env.PORT || 10000; // Ensure a port is set for Render
 
 // Exit Exam Date
-const examDate = new Date("2025-02-03T08:30:00Z");
+const examDate = new Date("2025-02-03T05:30:00Z");
 
 // Function to calculate the remaining time
 function getRemainingTime() {
