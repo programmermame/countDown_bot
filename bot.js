@@ -106,8 +106,8 @@ http.createServer(app).listen(port, () => {
     console.log(`Server is running on port ${port}`);
 });
 
-// Automate the reminder every day at 17:00
-cron.schedule('35 17 * * *', () => {
+// Automate the reminder every day at 17:40
+cron.schedule('40 14 * * *', () => {
     console.log('Sending automated reminder...');
     sendReminderMessage(groupId); // Send reminder to the group
 });
