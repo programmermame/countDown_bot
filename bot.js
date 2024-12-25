@@ -58,7 +58,8 @@ bot.onText(/\/start/, (msg) => {
 
 // Respond to "/remind" command but restrict to admin user only
 bot.onText(/\/remind/, (msg) => {
-    const chatId = msg.chat.id;
+    // const chatId = msg.chat.id;
+    process.env.YOUR_USER_ID
     const userId = msg.from.id;
 
     // Check if the user is the admin (you)
