@@ -91,15 +91,7 @@ app.post(`/bot${token}`, (req, res) => {
             if (userId === parseInt(adminUserId)) {
                 sendReminderMessage(chatId);
             } else {
-                const username = msg.from.username ? `@${msg.from.username}` : 'No username';
-                const fullName = `${msg.from.first_name} ${msg.from.last_name || ''}`;
-                const message = `${fullName} (${username}) tried to access the /remind command but is not authorized.`;
-
-                // Send a message to the admin about the unauthorized attempt
-                bot.sendMessage(adminUserId, `🚨 Unauthorized access attempt! 🚨\n\n${message}`);
-
-                // Send a message back to the unauthorized user
-                bot.sendMessage(chatId, "Sorry, you don't have permission to use this command. If you believe this is a mistake, please contact the admin.");
+                bot.sendMessage(chatId, "Sorry, you don't have permission to use this command.");
             }
         }
     }
