@@ -35,12 +35,12 @@ function getRemainingTime() {
 // Function to send reminder message
 function sendReminderMessage(chatId) {
     const { days, hours, minutes } = getRemainingTime();
-    let message = `⏰ *Reminder!* 📝\n\n`;
+    let message = "⏰ *Reminder!* 📝\n\n";
 
     if (days > 0) {
-        message += `Your Exit Exam is in *${days} days*, *${hours} hours*, and *${minutes} minutes*! 📚📖\n\n Time to study hard! 🔥📚`;
+        message += `Your Exit Exam is in *${days} days*, *${hours} hours*, and *${minutes} minutes*! 📚📖\n\nTime to study hard! 🔥📚`;
     } else if (days === 0 && hours > 0) {
-        message += `Your Exit Exam is today! Only *${hours} hours* and *${minutes} minutes* left! `;
+        message += `Your Exit Exam is today! Only *${hours} hours* and *${minutes} minutes* left!`;
     } else if (days === 0 && hours === 0 && minutes > 0) {
         message += `Your Exit Exam is in *${minutes} minutes*! 💥 It's almost time, good luck! 🍀`;
     } else {
@@ -58,19 +58,14 @@ bot.onText(/\/start/, (msg) => {
 
 // Respond to "/remind" command but restrict to admin user only
 bot.onText(/\/remind/, (msg) => {
-    // const chatId = msg.chat.id;
     const groupId = process.env.GROUP_CHAT_ID;
-    const chatId = msg.from.id;
     const userId = msg.from.id;
 
     // Check if the user is the admin (you)
     if (userId === parseInt(adminUserId)) {
-        sendReminderMessage(groupId);
-    } else if (userId !== parseInt(adminUserId)) {
-        bot.sendMessage(chatId, "Sorry, you don't have permission to use this command.");
-    }
-    else {
-        bot.sendMessage(chatId, "Sorry, you don't have permission to use this command.");
+        sendReminderMessage(groupId);  // Send reminder to the group
+    } else {
+        bot.sendMessage(userId, "Sorry, you don't have permission to use this command.");
     }
 });
 
@@ -94,7 +89,7 @@ app.post(`/bot${token}`, (req, res) => {
             const userId = update.message.from.id;
             // Check if the user is the admin
             if (userId === parseInt(adminUserId)) {
-                sendReminderMessage(chatId);
+                sendReminderMessage(chatId);  // Send reminder to the group
             } else {
                 bot.sendMessage(chatId, "Sorry, you don't have permission to use this command.");
             }
