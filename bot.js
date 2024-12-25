@@ -81,7 +81,6 @@ app.post(`/bot${token}`, (req, res) => {
     const update = req.body;
     if (update.message) {
         const chatId = update.message.chat.id;
-        const groupId = process.env.GROUP_CHAT_ID;
 
         // Handle incoming message
         if (update.message.text === '/start') {
@@ -90,7 +89,7 @@ app.post(`/bot${token}`, (req, res) => {
             const userId = update.message.from.id;
             // Check if the user is the admin
             if (userId === parseInt(adminUserId)) {
-                sendReminderMessage(groupId);  // Send reminder to the group
+                sendReminderMessage(chatId);  // Send reminder to the group
             } else {
                 bot.sendMessage(chatId, "Sorry, you don't have permission to use this command.");
             }
