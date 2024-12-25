@@ -107,7 +107,7 @@ http.createServer(app).listen(port, () => {
 });
 
 // Automate the reminder every day at 17:40
-cron.schedule('40 14 * * *', () => {
+cron.schedule('0 15 * * *', () => {
     console.log('Sending automated reminder...');
     sendReminderMessage(groupId); // Send reminder to the group
 });
