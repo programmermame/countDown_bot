@@ -46,7 +46,7 @@ function sendReminderMessage(chatId) {
 
 // Periodically send countdown updates to the group (once a day)
 setInterval(() => {
-    const chatId = process.env.GROUP_CHAT_ID;  // Use the group chat ID from .env
+    const chatId = process.env.YOUR_USER_ID;  // Use the group chat ID from .env
     sendReminderMessage(chatId);
 }, 1000 * 60 * 60 * 24);  // Send once a day
 
@@ -58,7 +58,7 @@ bot.onText(/\/start/, (msg) => {
 
 // Respond to "/remind" command but restrict to admin user only
 bot.onText(/\/remind/, (msg) => {
-    const chatId = process.env.GROUP_CHAT_ID;
+    const chatId = process.env.YOUR_USER_ID;
     const userId = msg.from.id;
 
     // Check if the user is the admin (you)
