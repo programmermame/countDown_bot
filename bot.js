@@ -59,13 +59,17 @@ bot.onText(/\/start/, (msg) => {
 // Respond to "/remind" command but restrict to admin user only
 bot.onText(/\/remind/, (msg) => {
     // const chatId = msg.chat.id;
-    const chatId = process.env.YOUR_USER_ID
+    const groupId = process.env.GROUP_CHAT_ID;
+    const chatId = msg.from.id;
     const userId = msg.from.id;
 
     // Check if the user is the admin (you)
     if (userId === parseInt(adminUserId)) {
         sendReminderMessage(chatId);
-    } else {
+    } else if (userId !== parseInt(adminUserId)) {
+        bot.sendMessage(chatId, "Sorry, you don't have permission to use this command.");
+    }
+    else {
         bot.sendMessage(chatId, "Sorry, you don't have permission to use this command.");
     }
 });
