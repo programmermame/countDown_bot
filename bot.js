@@ -65,7 +65,7 @@ bot.onText(/\/remind/, (msg) => {
 
     // Check if the user is the admin (you)
     if (userId === parseInt(adminUserId)) {
-        sendReminderMessage(chatId);
+        sendReminderMessage(groupId);
     } else if (userId !== parseInt(adminUserId)) {
         bot.sendMessage(chatId, "Sorry, you don't have permission to use this command.");
     }
