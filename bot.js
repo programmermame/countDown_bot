@@ -1,4 +1,4 @@
-// https://api.telegram.org/bot<YOUR-BOT-TOKEN>/getUpdates
+// https://api.telegram.org/bot<YOUR-BOT-TOKEN>/getUpdates 
 
 import TelegramBot from 'node-telegram-bot-api';
 import fetch from 'node-fetch'; // Use import instead of require
