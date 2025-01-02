@@ -11,7 +11,7 @@ dotenv.config(); // Load environment variables
 // Load Telegram Bot token and user ID from environment variables
 const token = process.env.TELEGRAM_BOT_TOKEN;
 const adminUserId = process.env.YOUR_USER_ID;  // Admin user ID from .env
-const groupId = process.env.GROUP_CHAT_ID;
+const groupIds = process.env.GROUP_CHAT_IDS.split(',');
 
 
 // Set up the Express app
@@ -37,7 +37,7 @@ function getRemainingTime() {
 }
 
 // Function to send reminder message
-function sendReminderMessage(groupId) {
+function sendReminderMessage() {
     const { days, hours, minutes } = getRemainingTime();
     let message = "⏰ *Reminder!* 📝\n\n";
 
@@ -50,8 +50,10 @@ function sendReminderMessage(groupId) {
     } else {
         message += `The Exit Exam has already passed. Good job for completing it! 🎓`;
     }
-
-    bot.sendMessage(groupId, message, { parse_mode: 'Markdown' });
+    // Loop through all group IDs and send the message
+    groupIds.forEach((groupId) => {
+        bot.sendMessage(groupId, message, { parse_mode: 'Markdown' });
+    });
 }
 
 // Respond to "/start" command
@@ -66,7 +68,7 @@ bot.onText(/\/remind/, (msg) => {
 
     // Check if the user is the admin (you)
     if (userId === parseInt(adminUserId)) {
-        sendReminderMessage(groupId);  // Send reminder to the group
+        sendReminderMessage();  // Send reminder to the group
     } else {
         bot.sendMessage(userId, "Sorry, you don't have permission to use this command.");
     }
@@ -92,7 +94,7 @@ app.post(`/bot${token}`, (req, res) => {
             const userId = update.message.from.id;
             // Check if the user is the admin
             if (userId === parseInt(adminUserId)) {
-                sendReminderMessage(groupId);  // Send reminder to the group
+                sendReminderMessage();  // Send reminder to the group
             } else {
                 bot.sendMessage(chatId, "Sorry, you don't have permission to use this command.");
             }
@@ -109,5 +111,5 @@ http.createServer(app).listen(port, () => {
 // Automate the reminder every day at 17:40
 cron.schedule('0 15 * * *', () => {
     console.log('Sending automated reminder...');
-    sendReminderMessage(groupId); // Send reminder to the group
+    sendReminderMessage(); // Send reminder to the group
 });
