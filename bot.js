@@ -70,7 +70,7 @@ bot.onText(/\/remind/, (msg) => {
     }
 });
 
-// Set webhook URL for Telegram bot
+// Set webhook URL for Telegram bot 
 const webhookUrl = `${process.env.HOST_URL}/bot${token}`;
 bot.setWebHook(webhookUrl);
 
