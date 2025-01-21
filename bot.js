@@ -39,14 +39,36 @@ function sendReminderMessage(groupId) {
     const { days, hours, minutes } = getRemainingTime();
     let message = "⏰ *Reminder!* 📝\n\n";
 
-    if (days > 0) {
+    if (days > 11) {
         message += `Your Exit Exam is in *${days} days*, *${hours} hours*, and *${minutes} minutes*! 📚📖\n\nTime to study hard! 🔥📚`;
+    } else if (days === 11) {
+        message += `Only *11 days* left until the Exit Exam! Time to get serious with your preparation. Let's go! 💪📖`;
+    } else if (days === 10) {
+        message += `Just *10 days* until your Exit Exam! It’s time to focus and make a study schedule. 🗓️📚`;
+    } else if (days === 9) {
+        message += `*9 days* remaining! Now’s the time to dive into your practice tests and review key concepts! 💡✏️`;
+    } else if (days === 8) {
+        message += `*8 days* left! Keep going with your revision and make sure to keep track of important topics. 🧠📑`;
+    } else if (days === 7) {
+        message += `Only *7 days* until your Exit Exam! It’s crunch time now—stay focused and keep reviewing. 🕒📖`;
+    } else if (days === 6) {
+        message += `*6 days* to go! Don’t forget to take short breaks while studying to stay sharp! 🧠⚡️`;
+    } else if (days === 5) {
+        message += `Just *5 days* left! Keep reviewing your notes and practice more problems. You’ve got this! 💥📝`;
+    } else if (days === 4) {
+        message += `*4 days* remaining! Review past exams and focus on any weak areas. 🧐📚`;
+    } else if (days === 3) {
+        message += `Only *3 days* left until the big day! Review key concepts and start simulating the exam environment. ⏳📘`;
+    } else if (days === 2) {
+        message += `Just *2 days* to go! You’re almost there, keep up the hard work! 🙌📖`;
+    } else if (days === 1) {
+        message += `Tomorrow is the day! Only *1 day* left until your Exit Exam. Make sure to rest and stay calm tonight. 💤📚`;
     } else if (days === 0 && hours > 0) {
-        message += `Your Exit Exam is today! Only *${hours} hours* and *${minutes} minutes* left!`;
+        message += `Your Exit Exam is today! Only *${hours} hours* and *${minutes} minutes* left! Stay calm, and do your best! 💪📘`;
     } else if (days === 0 && hours === 0 && minutes > 0) {
-        message += `Your Exit Exam is in *${minutes} minutes*! 💥 It's almost time, good luck! 🍀`;
+        message += `Your Exit Exam is in *${minutes} minutes*! 💥 It’s almost time—good luck! 🍀📚`;
     } else {
-        message += `The Exit Exam has already passed. Good job for completing it! 🎓`;
+        message += `The Exit Exam has already passed. Good job for completing it! 🎓👏`;
     }
 
     bot.sendMessage(groupId, message, { parse_mode: 'Markdown' });
