@@ -58,7 +58,9 @@ function sendReminderMessage(groupId) {
     } else if (days === 4) {
         message += `*4 days* remaining! Review past exams and focus on any weak areas. 🧐📚`;
     } else if (days === 3) {
-        message += `Only *3 days* left until the big day! Review key concepts and start simulating the exam environment. ⏳📘`;
+        message += `Only *3 days* left until the big day! Review key concepts and start simulating the exam environment.
+
+Remember, you can flag any questions you leave unanswered to easily return to them later⏳📘`;
     } else if (days === 2) {
         message += `Just *2 days* to go! You’re almost there, keep up the hard work! 🙌📖`;
     } else if (days === 1) {
