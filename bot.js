@@ -20,7 +20,7 @@ const bot = new TelegramBot(token);
 const port = process.env.PORT || 10000; // Ensure a port is set for Render
 
 // Exit Exam Date
-const examDate = new Date("2025-02-03T11:30:00Z");
+const examDate = new Date("2025-02-07T11:30:00Z");
 
 // Function to calculate the remaining time
 function getRemainingTime() {
@@ -48,9 +48,9 @@ function sendReminderMessage(groupId) {
     } else if (days === 9) {
         message += `*9 days* remaining! Now’s the time to dive into your practice tests and review key concepts! 💡✏️`;
     } else if (days === 8) {
-        message += `*8 days* left! Keep going with your revision and make sure to keep track of important topics. 🧠📑`;
+        message += `*${days} days*, *${hours} hours*, and *${minutes} minutes* left! Keep going with your revision and make sure to keep track of important topics. 🧠📑`;
     } else if (days === 7) {
-        message += `Only *7 days* until your Exit Exam! It’s crunch time now—stay focused and keep reviewing. 🕒📖`;
+        message += `Only *${days} days*, *${hours} hours*, and *${minutes} minutes* until your Exit Exam! It’s crunch time now—stay focused and keep reviewing. 🕒📖`;
     } else if (days === 6) {
         message += `*${days} days*, *${hours} hours*, and *${minutes} minutes* to go Don’t forget to take short breaks while studying to stay sharp! 🧠⚡️`;
     } else if (days === 5) {
