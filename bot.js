@@ -20,7 +20,7 @@ const bot = new TelegramBot(token);
 const port = process.env.PORT || 10000; // Ensure a port is set for Render
 
 // Exit Exam Date
-const examDate = new Date("2025-02-03T05:30:00Z");
+const examDate = new Date("2025-02-03T11:30:00Z");
 
 // Function to calculate the remaining time
 function getRemainingTime() {
@@ -52,19 +52,19 @@ function sendReminderMessage(groupId) {
     } else if (days === 7) {
         message += `Only *7 days* until your Exit Exam! It’s crunch time now—stay focused and keep reviewing. 🕒📖`;
     } else if (days === 6) {
-        message += `*6 days* to go! Don’t forget to take short breaks while studying to stay sharp! 🧠⚡️`;
+        message += `*${days} days*, *${hours} hours*, and *${minutes} minutes* to go Don’t forget to take short breaks while studying to stay sharp! 🧠⚡️`;
     } else if (days === 5) {
-        message += `Just *5 days* left! Keep reviewing your notes and practice more problems. You’ve got this! 💥📝`;
+        message += `Just *${days} days*, *${hours} hours*, and *${minutes} minutes* left! Keep reviewing your notes and practice more problems. You’ve got this! 💥📝`;
     } else if (days === 4) {
-        message += `*4 days* remaining! Review past exams and focus on any weak areas. 🧐📚`;
+        message += `*${days} days*, *${hours} hours*, and *${minutes} minutes* remaining! Review past exams and focus on any weak areas. 🧐📚`;
     } else if (days === 3) {
-        message += `Only *3 days* left until the big day! Review key concepts and start simulating the exam environment.
+        message += `Only *${days} days*, *${hours} hours*, and *${minutes} minutes*  left until the big day! Review key concepts and start simulating the exam environment.
 
 Remember, you can flag any questions you leave unanswered to easily return to them later⏳📘`;
     } else if (days === 2) {
-        message += `Just *2 days* to go! You’re almost there, keep up the hard work! 🙌📖`;
+        message += `Just *${days} days*, *${hours} hours*, and *${minutes} minutes* to go! You’re almost there, keep up the hard work! 🙌📖`;
     } else if (days === 1) {
-        message += `Tomorrow is the day! Only *1 day* left until your Exit Exam. Make sure to rest and stay calm tonight. 💤📚`;
+        message += `Tomorrow is the day! Only *${days} days*, *${hours} hours*, and *${minutes} minutes*  left until your Exit Exam. Make sure to rest and stay calm tonight. 💤📚`;
     } else if (days === 0 && hours > 0) {
         message += `Your Exit Exam is today! Only *${hours} hours* and *${minutes} minutes* left! Stay calm, and do your best! 💪📘`;
     } else if (days === 0 && hours === 0 && minutes > 0) {
