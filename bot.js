@@ -81,6 +81,11 @@ bot.onText(/\/start/, (msg) => {
     const chatId = msg.chat.id;
     bot.sendMessage(chatId, "Welcome to the Countdown Bot! I will remind you about the Exit Exam and give updates on the countdown.");
 });
+bot.onText(/\/year/, (msg) => {
+    const chatId = msg.chat.id;
+    bot.sendMessage(chatId, "🎉 1 Year Alumni 🎉 Throwback word: #noclass Current goal: #salary”");
+});
+
 
 // Respond to "/remind" command but restrict to admin user only
 bot.onText(/\/remind/, (msg) => {
