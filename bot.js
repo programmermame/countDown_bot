@@ -83,7 +83,8 @@ bot.onText(/\/start/, (msg) => {
 });
 bot.onText(/\/year/, (msg) => {
     const chatId = msg.chat.id;
-    bot.sendMessage(chatId, "🎉 1 Year Alumni 🎉 Throwback word: #noclass Current goal: #salary”");
+    
+    bot.sendMessage(groupId, "🎉 1 Year Alumni 🎉 Throwback word: #noclass Current goal: #salary”");
 });
 
 
