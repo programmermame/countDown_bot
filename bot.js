@@ -106,6 +106,7 @@ app.use(express.json()); // Parse incoming JSON requests
 
 // Endpoint that Telegram will send POST requests to
 app.post(`/bot${token}`, (req, res) => {
+    bot.processUpdate(req.body);  // 🔥 This is the missing piece
     const update = req.body;
     if (update.message) {
         const chatId = update.message.chat.id;
